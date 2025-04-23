@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' as io__;
 import 'dart:async' as async__;
 import 'dart:convert' as convert__;
 
@@ -21,20 +21,24 @@ String makeCommandLine(List<String> commandList) {
 String shell = 'bash';
 
 /// Execute command (string) in bash
-Future<String> $(String command) async {
+Future<String> $(String command, {bool ignoreError = false}) async {
   var completer = async__.Completer<String>();
   String buffer = '';
-  Process.start(shell, ['-c', command]).then((process) {
-    print('\$ $command');
+  String workingDirectory = io__.Directory.current.absolute.path;
+  io__.Process.start(shell, ['-c', command]).then((process) {
+    print('[$workingDirectory] \$ $command');
 
     process.stdout.transform(convert__.utf8.decoder).listen((data) {
-      stdout.write(data);
+      io__.stdout.write(data);
       buffer += data;
     });
     process.stderr.transform(convert__.utf8.decoder).listen((data) {
-      stderr.write(data);
+      io__.stderr.write(data);
     });
     process.exitCode.then((code) {
+      if ((!ignoreError) && code != 0) {
+        throw 'ShellException($command, exitCode $code, workingDirectory: $workingDirectory)';
+      }
       if (buffer.endsWith('\r\n')) {
         buffer = buffer.substring(0, buffer.length - 2);
       } else if (buffer.endsWith('\n')) {
@@ -51,7 +55,7 @@ Future<String> $(String command) async {
 }
 
 /// Execute command (list of string) in bash
-Future<String> $$(List<String> commandList) async {
+Future<String> $$(List<String> commandList, {bool ignoreError = false}) async {
   String command = makeCommandLine(commandList);
-  return $(command);
+  return $(command, ignoreError: ignoreError);
 }

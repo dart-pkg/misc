@@ -11,3 +11,7 @@
 ## 2025.423.1928
 
 - Added $() and $$()
+
+## 2025.423.1946
+
+- $() and $$() accept ignoreError optional name parameter
