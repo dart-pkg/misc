@@ -39,3 +39,7 @@
 ## 2025.424.56
 
 - Modified makeCommandLine()
+
+## 2025.424.118
+
+- Removed all of the dependencies
