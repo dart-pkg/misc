@@ -25,14 +25,20 @@ void main() {
       ]);
       echo(cmd4, 'cmd4');
       expect(cmd4 == r'''"find" "." "-name" "*.dart" | "wc" "-l"''', isTrue);
+      String cmd5 = misc.makeCommandLine(['ls', ';', 'ls']);
+      echo(cmd5, 'cmd15');
+      expect(cmd5 == r'''"ls" ; "ls"''', isTrue);
     });
     test('run2', () {
-      echoJson(misc.splitCommandLine('bash -c "uname -a"'));
-      echoJson(misc.splitCommandLine("bash -c 'uname -a'"));
+      //echoJson(misc.splitCommandLine('bash -c "uname -a"'));
+      //echoJson(misc.splitCommandLine("bash -c 'uname -a'"));
       echoJson(
         misc.splitCommandLine(
           'dart pub deps --no-dev --style list | sed "/^ .*/d"',
         ),
+      );
+      echoJson(
+        misc.splitCommandLine('find . -name *.dart -exec grep abc {} \\;'),
       );
     });
   });

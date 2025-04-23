@@ -9,7 +9,9 @@ String makeCommandLine(List<String> commandList) {
   String command = '"${commandList[0]}"';
   for (int i = 1; i < commandList.length; i++) {
     String arg = commandList[i];
-    if (arg.contains('|') ||
+    if (arg == ';') {
+      command += ' $arg';
+    } else if (arg.contains('|') ||
         arg.contains('&') ||
         arg.contains('<') ||
         arg.contains('>')) {
