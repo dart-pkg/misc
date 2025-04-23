@@ -19,3 +19,7 @@
 ## 2025.423.2215
 
 - Added splitCommandLine() and removed $() and $$()
+
+## 2025.423.2241
+
+- Fixed a bug in splitCommandLine()
