@@ -15,7 +15,10 @@ String makeCommandLine(List<String> commandList) {
     // } else {
     //   command += ' ${commandList[i]}';
     // }
-    if (arg.startsWith('|') || arg.startsWith('&') || arg.startsWith('>')) {
+    if (arg.startsWith('|') ||
+        arg.startsWith('&') ||
+        arg.startsWith('<') ||
+        arg.startsWith('>')) {
       command += ' $arg';
     } else {
       command += ' "$arg"';

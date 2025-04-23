@@ -27,3 +27,7 @@
 ## 2025.424.6
 
 - Changed parser spec
+
+## 2025.424.12
+
+- Modified makeCommandLine()
