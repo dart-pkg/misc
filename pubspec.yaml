@@ -1,6 +1,6 @@
 name: "misc"
 description: "misc project"
-version: 2025.424.12
+version: 2025.424.28
 homepage: null
 repository: "https://github.com/dart-pkg/misc"
 environment:
