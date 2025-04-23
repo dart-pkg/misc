@@ -7,3 +7,7 @@
 ## 2025.423.1904
 
 - Modified makeCommandLine()
+
+## 2025.423.1928
+
+- Added $() and $$()
