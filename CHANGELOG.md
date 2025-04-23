@@ -23,3 +23,7 @@
 ## 2025.423.2241
 
 - Fixed a bug in splitCommandLine()
+
+## 2025.424.6
+
+- Changed parser spec

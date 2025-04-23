@@ -1,10 +1,12 @@
 name: "misc"
 description: "misc project"
-version: 2025.423.2241
+version: 2025.424.6
 homepage: null
 repository: "https://github.com/dart-pkg/misc"
 environment:
   sdk: "^3.7.2"
+dependencies:
+  string_scanner: ^1.4.1
 dev_dependencies:
   lints: ^5.1.1
   output: ^1.0.7
