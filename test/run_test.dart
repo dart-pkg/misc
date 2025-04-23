@@ -26,5 +26,9 @@ void main() {
       echo(cmd4, 'cmd4');
       expect(cmd4 == r'''find . -name "*.dart" | wc -l''', isTrue);
     });
+    test('run2', () {
+      echoJson(misc.splitCommandLine('bash -c "uname -a"'));
+      echoJson(misc.splitCommandLine("bash -c 'uname -a'"));
+    });
   });
 }

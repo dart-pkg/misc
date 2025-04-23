@@ -1,6 +1,8 @@
-import 'dart:io' as io__;
-import 'dart:async' as async__;
-import 'dart:convert' as convert__;
+//import 'dart:io' as io__;
+//import 'dart:async' as async__;
+//import 'dart:convert' as convert__;
+import 'package:commandline_splitter2/commandline_splitter2.dart'
+    as commandline_splitter2__;
 
 /// Makes a command line string from List of String.
 String makeCommandLine(List<String> commandList) {
@@ -17,45 +19,17 @@ String makeCommandLine(List<String> commandList) {
   return command;
 }
 
-/// Executable name for $() and $$() (default is `bash')
-String shell = 'bash';
-
-/// Execute command (string) in bash
-Future<String> $(String command, {bool ignoreError = false}) async {
-  var completer = async__.Completer<String>();
-  String buffer = '';
-  String workingDirectory = io__.Directory.current.absolute.path;
-  io__.Process.start(shell, ['-c', command]).then((process) {
-    print('[$workingDirectory] \$ $command');
-
-    process.stdout.transform(convert__.utf8.decoder).listen((data) {
-      io__.stdout.write(data);
-      buffer += data;
-    });
-    process.stderr.transform(convert__.utf8.decoder).listen((data) {
-      io__.stderr.write(data);
-    });
-    process.exitCode.then((code) {
-      if ((!ignoreError) && code != 0) {
-        throw 'ShellException($command, exitCode $code, workingDirectory: $workingDirectory)';
-      }
-      if (buffer.endsWith('\r\n')) {
-        buffer = buffer.substring(0, buffer.length - 2);
-      } else if (buffer.endsWith('\n')) {
-        buffer = buffer.substring(0, buffer.length - 1);
-      } else if (buffer.endsWith('\r')) {
-        buffer = buffer.substring(0, buffer.length - 1);
-      }
-      buffer = buffer.replaceAll('\r\n', '\n');
-      buffer = buffer.replaceAll('\r', '\n');
-      completer.complete(buffer);
-    });
-  });
-  return completer.future;
-}
-
-/// Execute command (list of string) in bash
-Future<String> $$(List<String> commandList, {bool ignoreError = false}) async {
-  String command = makeCommandLine(commandList);
-  return $(command, ignoreError: ignoreError);
+List<String> splitCommandLine(String command) {
+  final split = commandline_splitter2__.split(command);
+  final result = <String>[];
+  for (int i = 0; i < split.length; i++) {
+    String arg = split[i];
+    //echo(arg, 'arg');
+    if ((arg.startsWith('"') && arg.endsWith('"')) ||
+        (arg.startsWith("'") && arg.endsWith("'"))) {
+      arg = arg.substring(1, arg.length - 1);
+    }
+    result.add(arg);
+  }
+  return result;
 }
