@@ -1,18 +1,8 @@
-//import 'dart:io' as io__;
-//import 'dart:async' as async__;
-//import 'dart:convert' as convert__;
-
 /// Makes a command line string from List of String (arg list).
 String makeCommandLine(List<String> commandList) {
   String command = commandList[0];
   for (int i = 1; i < commandList.length; i++) {
     String arg = commandList[i];
-    // if (!(arg.startsWith('"') || arg.startsWith("'") || arg.startsWith('`')) &&
-    //     (commandList[i].contains(' ') || commandList[i].contains(r'\'))) {
-    //   command += ' "${commandList[i]}"';
-    // } else {
-    //   command += ' ${commandList[i]}';
-    // }
     command += ' $arg';
   }
   return command;
@@ -39,12 +29,13 @@ List<String> _split(String command) {
   while (command.isNotEmpty) {
     var regexp = RegExp(r"""[^'"-\s]+""");
     if (command[0] == '-') {
-      //regexp = RegExp(r"""--?[^'"-\s]+""");
       regexp = RegExp(r"""--?[^'"\s]+""");
     } else if (command[0] == "'") {
       regexp = RegExp(r"""'[^']+'""");
     } else if (command[0] == '"') {
       regexp = RegExp(r'''"[^"]+"''');
+    } else if (command[0] == '`') {
+      regexp = RegExp(r'''`[^`]+`''');
     }
     final match = regexp.matchAsPrefix(command);
     if (match != null) {

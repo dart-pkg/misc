@@ -30,8 +30,6 @@ void main() {
       expect(cmd5 == r'''ls ; ls''', isTrue);
     });
     test('run2', () {
-      //echoJson(misc.splitCommandLine('bash -c "uname -a"'));
-      //echoJson(misc.splitCommandLine("bash -c 'uname -a'"));
       echoJson(
         misc.splitCommandLine(
           'dart pub deps --no-dev --style list | sed "/^ .*/d"',
@@ -39,6 +37,11 @@ void main() {
       );
       echoJson(
         misc.splitCommandLine('find . -name "*.dart" -exec grep abc {} \\;'),
+      );
+      echoJson(
+        misc.splitCommandLine(
+          'echo `find . -name "*.dart" -exec grep abc {} \\;`',
+        ),
       );
     });
   });
