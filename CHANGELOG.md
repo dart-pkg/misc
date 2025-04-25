@@ -47,3 +47,7 @@
 ## 2025.424.1249
 
 - Modified makeCommandLine()
+
+## 2025.426.348
+
+- Renamed makeCommandLine() to joinCommandLine()
