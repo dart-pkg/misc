@@ -51,3 +51,7 @@
 ## 2025.426.348
 
 - Renamed makeCommandLine() to joinCommandLine()
+
+## 2025.426.359
+
+- [misc] A dependncy less dart package.
