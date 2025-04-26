@@ -2,7 +2,7 @@ name: "misc"
 description: |-
   [misc]
   A dependncy less dart package.
-version: 2025.426.359
+version: 2025.426.1656
 homepage: null
 repository: "https://github.com/dart-pkg/misc"
 environment:
