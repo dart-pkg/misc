@@ -72,3 +72,16 @@
 -  output: ^1.0.7
 +  output: ^2025.426.2027
 ```
+
+## 2025.501.111
+
+- Backport from std package
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.426.2309
++version: 2025.501.111
++dependencies:
++  path: ^1.9.1
+```
