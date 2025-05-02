@@ -85,3 +85,18 @@
 +dependencies:
 +  path: ^1.9.1
 ```
+
+## 2025.503.25
+
+- Backport from package:std/misc.dart
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.501.111
++version: 2025.503.25
+-  output: ^2025.430.1731
++  output: ^2025.502.1958
++  crypto: ^3.0.6
++  uuid: ^4.5.1
+```

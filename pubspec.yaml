@@ -2,14 +2,16 @@ name: misc
 description: |-
   [misc]
   A dependncy less dart package.
-version: 2025.501.111
+version: 2025.503.25
 homepage: 
 repository: https://github.com/dart-pkg/misc
 environment:
   sdk: ^3.7.2
 dev_dependencies:
   lints: ^5.1.1
-  output: ^2025.430.1731
+  output: ^2025.502.1958
   test: ^1.25.15
 dependencies:
   path: ^1.9.1
+  crypto: ^3.0.6
+  uuid: ^4.5.1
