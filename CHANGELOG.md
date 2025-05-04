@@ -100,3 +100,15 @@
 +  crypto: ^3.0.6
 +  uuid: ^4.5.1
 ```
+
+## 2025.504.1246
+
+- Backport from package:std/misc.dart
+
+```
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+-version: 2025.503.25
++version: 2025.504.1246
++  system_info2: ^4.0.0
+```

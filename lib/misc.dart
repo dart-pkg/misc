@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:path/path.dart' as path_path;
 import 'package:crypto/crypto.dart' as crypto_crypto;
 import 'package:uuid/uuid.dart' as uuid_uuid;
+import 'package:system_info2/system_info2.dart' as sys_info;
 
 /// Makes a command line string from List of String (arg list).
 String joinCommandLine(List<String> command) {
@@ -137,10 +138,10 @@ String? getenv(String name) {
 
 /// Expands path with environment variables
 String pathExpand(String path) {
-  if (path.startsWith('~/')) {
+  if (path.startsWith('~')) {
     String? home = getenv('HOME');
     if (home != null) {
-      path = '$home/${path.substring(2)}';
+      path = '$home${path.substring(1)}';
     }
   }
   path = path.replaceAllMapped(RegExp(r'[$]([_0-9a-zA-Z]+)'), (match) {
@@ -158,7 +159,20 @@ String pathExpand(String path) {
     String? varValue = getenv(varName);
     return varValue ?? match.group(0)!;
   });
-  return path.replaceAll(r'\', '/');
+  //return path.replaceAll(r'\', '/');
+  return pathFullName(path);
+}
+
+/// Joins the given path parts into a single path
+String pathJoin(List<String> parts) {
+  if (parts.isEmpty) {
+    return '';
+  }
+  String path = parts[0];
+  for (int i = 1; i < parts.length; i++) {
+    path = path_path.join(path, parts[i]);
+  }
+  return pathExpand(path);
 }
 
 /// Sets current directory
@@ -270,6 +284,11 @@ void pathRename(String oldPath, String newPath) {
 /// Returns system temporary directory path
 String get pathOfTempDir {
   return pathFullName(dart_io.Directory.systemTemp.path);
+}
+
+/// Returns system temporary directory path
+String get pathOfUserDir {
+  return pathFullName(sys_info.SysInfo.userDirectory);
 }
 
 /// Reads file content as bytes
